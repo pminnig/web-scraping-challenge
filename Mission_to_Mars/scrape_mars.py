@@ -30,6 +30,8 @@ def scrape():
     redplanet_results = redplanet_soup.find_all('div', class_='list_text')
     news_title = redplanet_soup.find('div', class_='content_title').text
     news_p = redplanet_soup.find('div', class_='article_teaser_body').text
+    print(news_title)
+    print(news_p)
 
     # Setting up splinter to find the featured image url
     executable_path = {'executable_path': ChromeDriverManager().install()}
@@ -45,7 +47,9 @@ def scrape():
 
     # find featured image extension and add it onto the base html
     featured_image_result = soup.find_all('img', class_='fancybox-image')
-    featured_image = featured_image_result[0].get('src')
+    featured_src = featured_image_result[0].get('src')
+    featured_image = spaceimg_url + featured_src
+    print(featured_image)
 
     # Reading in the HTML tables
     tables = pd.read_html(marsfact_url)
@@ -54,6 +58,8 @@ def scrape():
     mars_df = tables[1]
     mars_df = mars_df.rename(columns={0: 'Attribute', 1: 'Value'})
     mars_df = mars_df.set_index('Attribute')
+    mars_table = mars_df.to_html()
+    print(mars_table)
 
     # find the links to each hemisphere's page
     links = []
@@ -72,8 +78,9 @@ def scrape():
         image = hemisphere_soup.find('img', class_='wide-image')
         title = hemisphere_soup.find('h2', class_='title').text
         title = title.replace('Enhanced','')
-        hemisphere_image_urls.append({'title': title, 'img_url': image.get("src")})
+        hemisphere_image_urls.append({'title': title, 'img_url': hemisphere_url + image.get("src")})
 
-    html_dict = {news_title,news_p,featured_image,mars_df,hemisphere_image_urls}
+    
 
-
+    html_dict = { 'title':news_title, 'paragraph':news_p,'f_images':featured_image, 'facts':mars_table, 'hem_urls':hemisphere_image_urls}
+    return html_dict

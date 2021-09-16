@@ -20,10 +20,10 @@
 				<h2>Latest Mars News</h2>
 			</div>
 			<div class="col-md-12">
-				<h3></h3>
+				<h3>{{ html_dict.title }}</h3>
 			</div>
 			<div class="col-md-12">
-				<p></p>
+				<p>{{ html_dict.paragraph }}</p>
 			</div>
 		</div>
 		<div class="row">
@@ -36,26 +36,12 @@
 		</div>
 		<div class="row">
 			<div class="col-md-7">
-				<img src="https://marshemispheres.com/images/f5e372a36edfa389625da6d0cc25d905_cerberus_enhanced.tif_full.jpg" style="width: 60rem;">
+				<img src={{ html_dict.f_images }} style="width: 60rem;">
 			</div>
 			<div class="col-md-5">
-				<table>
-				  <tr>
-					<th>Company</th>
-					<th>Contact</th>
-					<th>Country</th>
-				  </tr>
-				  <tr>
-					<td>Alfreds Futterkiste</td>
-					<td>Maria Anders</td>
-					<td>Germany</td>
-				  </tr>
-				  <tr>
-					<td>Centro comercial Moctezuma</td>
-					<td>Francisco Chang</td>
-					<td>Mexico</td>
-				  </tr>
-				</table>
+				
+				  {{ html_dict.facts | safe}}
+				
 			</div>
 		</div>
 		<div class="row">
@@ -64,49 +50,19 @@
 			</div>
 		</div>
 		<div class="row">
+			
+			{% for hemi in html_dict.hem_urls %}
 			<div class="col-md-3">
-				<div class="card" style="width: 18rem;">
-				  <img src="href="https://marshemispheres.com/images/f5e372a36edfa389625da6d0cc25d905_cerberus_enhanced.tif_full.jpg"" class="card-img-top" alt="...">
+				<div class="card" width="200" height="200">
+				  <img src={{ hemi.img_url }} class="card-img-top" alt="..." width="200" height="200">
 				  <div class="card-body">
-					<h5 class="card-title">Card title</h5>
-					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-					<a href="#" class="btn btn-primary">Go somewhere</a>
-				  </div>
-				</div>				
-			</div>
-			<div class="col-md-3">
-				<div class="card" style="width: 18rem;">
-				  <img src="href="https://marshemispheres.com/images/f5e372a36edfa389625da6d0cc25d905_cerberus_enhanced.tif_full.jpg"" class="card-img-top" alt="...">
-				  <div class="card-body">
-					<h5 class="card-title">Card title</h5>
-					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-					<a href="#" class="btn btn-primary">Go somewhere</a>
+					<h5 class="card-title">{{ hemi.title }} </h5>
+					
 				  </div>
 				</div>				
 				
 			</div>
-			<div class="col-md-3">
-				<div class="card" style="width: 18rem;">
-				  <img src="href="https://marshemispheres.com/images/f5e372a36edfa389625da6d0cc25d905_cerberus_enhanced.tif_full.jpg"" class="card-img-top" alt="...">
-				  <div class="card-body">
-					<h5 class="card-title">Card title</h5>
-					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-					<a href="#" class="btn btn-primary">Go somewhere</a>
-				  </div>
-				</div>				
-				
-			</div>
-			<div class="col-md-3">
-				<div class="card" style="width: 18rem;">
-				  <img src="href="https://marshemispheres.com/images/f5e372a36edfa389625da6d0cc25d905_cerberus_enhanced.tif_full.jpg"" class="card-img-top" alt="...">
-				  <div class="card-body">
-					<h5 class="card-title">Card title</h5>
-					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-					<a href="#" class="btn btn-primary">Go somewhere</a>
-				  </div>
-				</div>				
-				
-			</div>
+			{% endfor %}
 		</div>
 	</div>
 

@@ -11,9 +11,9 @@ db = client.mars_info
 def scraper():
 
     db.mars_info.drop()
-    return scrape_mars.scrape()
-    db.mars_info.insert_many(html_dict)
-    return render_template("index.html")
+    html_dict = scrape_mars.scrape()
+    db.mars_info.insert_one(html_dict)
+    return render_template("index.html", html_dict=html_dict)
 
 @app.route("/")
 def index():
